@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 import re
 from sre_parse import Verbose
 from telnetlib import STATUS
@@ -98,14 +99,28 @@ class Test(models.Model):
         return self.Test_name
 
 class Appointment(models.Model):
+    Person_name = models.ForeignKey(Person, on_delete=models.PROTECT, null=True, verbose_name="PERSON NAME")
     Doctor_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='DOCTOR NAME')
     Date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='DATE/TIME')
     Health_condition = models.CharField(max_length=100, blank=True, null=True, verbose_name='HEALTH CONDITION')
-    Estimated_time_duration = models.IntegerField(max_length=2, blank=True, null=True, verbose_name='ESTIMATED TIME DURATION')
+    Appointment_time_duration = models.IntegerField(max_length=2, blank=True, null=True, verbose_name='APPOINTMENT TIME DURATION')
+    Appointment_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name='APPOINTMENT NOTES')
     
 
     def __str__(self):
         return self.Doctor_name
+
+class Test_result(models.Model):
+    Test_name = models.ForeignKey(Test, on_delete=models.PROTECT, null=True, verbose_name="PERSON NAME FOR RESULT")
+    Unit_of_measure = models.CharField(max_length=50, blank=True, null=True, verbose_name='UNIT OF MEASURE')
+    Normal_range =  models.CharField(max_length=50, blank=True, null=True, verbose_name='NORMAL RANGE') 
+    Result_value =  Unit_of_measure = models.CharField(max_length=50, blank=True, null=True, verbose_name='RESULT VALUE')
+    X_ray = models.ImageField(upload_to='x_ray/', null=True, blank=True)
+    Result_report = models.ImageField(upload_to='test_result', null=True, blank=True)
+
+    def __str__(self):
+        return self.Test_name
+
 
 
 
