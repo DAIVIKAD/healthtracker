@@ -67,6 +67,7 @@ class Person(models.Model):
         ('UNHEALTHY','Unhealthy'))
 
 
+
     Person_name = models.CharField(max_length=100,blank=True, null=True, verbose_name="Person name")
     Person_address = models.CharField(max_length=120, blank=True, null=True, verbose_name="Person address")
     Person_pri_phone= models.CharField(max_length=13, blank=True, null=True, verbose_name="Person pri_phone")
@@ -81,6 +82,18 @@ class Person(models.Model):
 
     def __str__(self):
         return self.Person_name
+
+class Test(models.Model):
+    Test_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='TEST NAME')
+    Test_description = models.CharField(max_length=200, blank=True, null=True, verbose_name='TEST DESCRIPTION')
+    Test_pre_condition = models.CharField(max_length=200, blank=True, null=True, verbose_name='TEST PRE-CONDITION')
+    Test_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name='TEST NOTES')
+    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
+    Added_date_time = models.DateField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME' )
+
+    def __str__(self):
+        return self.Test_name
+
 
 
         
