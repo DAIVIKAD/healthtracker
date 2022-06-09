@@ -93,8 +93,8 @@ class Test(models.Model):
     Test_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name='TEST NOTES')
     Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
     Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
-    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
-    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
+    updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
 
 
     def __str__(self):
@@ -105,7 +105,7 @@ class Appointment(models.Model):
     Doctor_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='DOCTOR NAME')
     Date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='DATE/TIME')
     Health_condition = models.CharField(max_length=100, blank=True, null=True, verbose_name='HEALTH CONDITION')
-    Appointment_time_duration = models.IntegerField(max_length=2, blank=True, null=True, verbose_name='APPOINTMENT TIME DURATION')
+    Appointment_time_duration = models.IntegerField( blank=True, null=True, verbose_name='APPOINTMENT TIME DURATION')
     Appointment_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name='APPOINTMENT NOTES')
     
 
@@ -113,10 +113,9 @@ class Appointment(models.Model):
         return self.Doctor_name
 
 class Test_result(models.Model):
-    Test_name = models.ForeignKey(Test, on_delete=models.PROTECT, null=True, verbose_name="PERSON NAME FOR RESULT")
     Unit_of_measure = models.CharField(max_length=50, blank=True, null=True, verbose_name='UNIT OF MEASURE')
     Normal_range =  models.CharField(max_length=50, blank=True, null=True, verbose_name='NORMAL RANGE') 
-    Result_value =  Unit_of_measure = models.CharField(max_length=50, blank=True, null=True, verbose_name='RESULT VALUE')
+    Result_value =  models.CharField(max_length=50, blank=True, null=True, verbose_name='RESULT VALUE')
     X_ray = models.ImageField(upload_to='x_ray/', null=True, blank=True)
     Result_report = models.ImageField(upload_to='test_result', null=True, blank=True)
 
