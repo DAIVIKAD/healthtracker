@@ -66,6 +66,8 @@ class Person(models.Model):
         ('SICK','sick'),
         ('HEALTHY','Healthy'),
         ('UNHEALTHY','Unhealthy'))
+    
+    # Specialized = ((' Cardiologist'))
 
 
 
@@ -76,9 +78,9 @@ class Person(models.Model):
     Person_dob = models.DateField(blank=True,null=True,verbose_name="DOB")
     Person_gender = models.CharField(max_length=1, choices= Gender, default='M', verbose_name="Gender")
     Person_email = models.EmailField(max_length=100, blank=True, null=True, verbose_name="Email Address")
-    Person_status = models.CharField(max_length=20, blank=True, null=True, verbose_name="health status")
+    Person_status = models.CharField(max_length=20, blank=True,choices=Status, default='HEALTHY', null=True, verbose_name="health status")
     Person_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name="health notes")
-    Person_rating = models.CharField(max_length=1, choices=Ratings,default=5,verbose_name="Rating")
+    Person_rating = models.CharField(max_length=1, choices=Ratings, default='5', verbose_name="Rating")
     
 
     def __str__(self):
@@ -120,6 +122,18 @@ class Test_result(models.Model):
 
     def __str__(self):
         return self.Test_name
+
+class Hospital(models.Model):
+    Hospital_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='HOSPITAL NAME')
+    Hospital_address = models.CharField(max_length=100, blank=True, null=True, verbose_name='HOSPITAL ADDRESS')
+    Contact_details = models.IntegerField(blank=True, null=True, verbose_name='CONTACT DETAILS')
+
+    def __str__(self):
+        return self.Hospital_name
+
+# class Doctor_details(models.Model):
+#     Doctor_name = models.ForeignKey(Appointment, on_delete=models.PROTECT, null=True, verbose_name="DOCTOR NAME")
+#     Specialized_of = models.CharField(max_length=100, blank=True, null=True, verbose_name='SPECIALZED OF')
 
 
 

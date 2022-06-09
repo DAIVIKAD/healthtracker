@@ -1,6 +1,6 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-from .models import AppUser, Person, Test, Appointment, Test_result
+from .models import AppUser, Hospital, Person, Test, Appointment, Test_result, Hospital
 from django.contrib.auth.admin  import UserAdmin
 
 # Register your models here.
@@ -28,5 +28,6 @@ admin.site.register(Person)
 admin.site.register(Test)
 admin.site.register(Appointment)
 admin.site.register(Test_result)
+admin.site.register(Hospital)
 
 
