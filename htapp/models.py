@@ -89,10 +89,25 @@ class Test(models.Model):
     Test_pre_condition = models.CharField(max_length=200, blank=True, null=True, verbose_name='TEST PRE-CONDITION')
     Test_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name='TEST NOTES')
     Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
-    Added_date_time = models.DateField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME' )
+    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
+
 
     def __str__(self):
         return self.Test_name
+
+class Appointment(models.Model):
+    Doctor_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='DOCTOR NAME')
+    Date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='DATE/TIME')
+    Health_condition = models.CharField(max_length=100, blank=True, null=True, verbose_name='HEALTH CONDITION')
+    Estimated_time_duration = models.NumberField(max_length=2, blank=True, null=True, verbose_name='ESTIMATED TIME DURATION')
+    
+
+    def __str__(self):
+        return self.Doctor_name
+
+
 
 
 

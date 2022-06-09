@@ -1,6 +1,6 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-from .models import AppUser, Person, Test 
+from .models import AppUser, Person, Test, Appointment
 from django.contrib.auth.admin  import UserAdmin
 
 # Register your models here.
@@ -26,6 +26,7 @@ class UserAdminConfig(UserAdmin):
 admin.site.register(AppUser, UserAdminConfig)
 admin.site.register(Person)
 admin.site.register(Test)
+admin.site.register(Appointment)
 
 
 
