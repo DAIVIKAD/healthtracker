@@ -101,7 +101,7 @@ class Appointment(models.Model):
     Doctor_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='DOCTOR NAME')
     Date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='DATE/TIME')
     Health_condition = models.CharField(max_length=100, blank=True, null=True, verbose_name='HEALTH CONDITION')
-    Estimated_time_duration = models.NumberField(max_length=2, blank=True, null=True, verbose_name='ESTIMATED TIME DURATION')
+    Estimated_time_duration = models.IntegerField(max_length=2, blank=True, null=True, verbose_name='ESTIMATED TIME DURATION')
     
 
     def __str__(self):
