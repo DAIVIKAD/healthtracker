@@ -210,7 +210,7 @@ class Invoice(models.Model):
     Company_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='COMPANY NAME')
     Invoice_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='INVOICE DATE/TIME')
     Invoice_due_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='INVOICE DUE DATE/TIME')
-    Description = models.CharField(max_length=100, blank=True, null=True, verbose_name='DESCRIPTION')
+    Description = models.CharField(max_length=200, blank=True, null=True, verbose_name='DESCRIPTION')
     Quality = models.IntegerField(blank=True, null=True, verbose_name='QUALITY')
     Price = models.IntegerField(blank=True, null=True, verbose_name='PRICE')
     Tax = models.IntegerField(blank=True, null=True, verbose_name='TAX')
@@ -223,7 +223,45 @@ class Invoice(models.Model):
     def __str__(self):
         return self.Invoice_number
 
-        
+
+class Fees_type(models.Model):
+
+    Cunsultancy_fees = models.IntegerField(blank=True, null=True, verbose_name='CUNSULTANCY FEES')
+    Laboratory_fees = models.IntegerField(blank=True, null=True, verbose_name='LABORATORY FEES')
+    Pharmacy_fees = models.IntegerField(blank=True, null=True, verbose_name='PHARMACY FEES')
+    Other_fees = models.IntegerField(blank=True, null=True, verbose_name='OTHER FEES')
+    Grand_total = models.IntegerField(blank=True, null=True, verbose_name='GRAND TOTAL')
+    Paid_through = models.CharField(max_length=100, blank=True, null=True, verbose_name='PAID THROUGH')
+    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
+    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
+
+
+    def __str__(self):
+        return self.Cunsultancy_fees
+
+
+class Insurance(models.Model):
+
+    Insurance_type = models.CharField(max_length=100, blank=True, null=True, verbose_name='INSURANCE TYPE')
+    Insurance_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='INSURANCE NAME')
+    Valid_from = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='VALID FROM')
+    Valid_to = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='VALID TO')
+    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
+    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
+
+    def __str__(self):
+        return self.Insurance_type
+
+
+
+
+
+
+
 
 
 
