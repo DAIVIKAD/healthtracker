@@ -53,6 +53,7 @@ class Person(models.Model):
 
     Gender = (('M','Male'),
         ('F','Female'),
+        ('M','Male'),
         ('O','Other'))
 
     Ratings = (('1', '*'),
@@ -66,7 +67,7 @@ class Person(models.Model):
         ('HEALTHY','Healthy'),
         ('UNHEALTHY','Unhealthy'))
     
-    # Specialized = ((' Cardiologist'))
+
 
 
 
@@ -77,9 +78,13 @@ class Person(models.Model):
     Person_dob = models.DateField(blank=True,null=True,verbose_name="DOB")
     Person_gender = models.CharField(max_length=1, choices= Gender, default='M', verbose_name="Gender")
     Person_email = models.EmailField(max_length=100, blank=True, null=True, verbose_name="Email Address")
-    Person_status = models.CharField(max_length=20, blank=True,choices=Status, default='HEALTHY', null=True, verbose_name="health status")
+    Person_status = models.CharField(max_length=1, blank=True,choices=Status, default='HEALTHY', null=True, verbose_name="health status")
     Person_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name="health notes")
     Person_rating = models.CharField(max_length=1, choices=Ratings, default='5', verbose_name="Rating")
+    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
+    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
     
 
     def __str__(self):
@@ -92,8 +97,8 @@ class Test(models.Model):
     Test_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name='TEST NOTES')
     Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
     Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
-    updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
-    updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
 
 
     def __str__(self):
@@ -104,19 +109,28 @@ class Appointment(models.Model):
     Doctor_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='DOCTOR NAME')
     Date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='DATE/TIME')
     Health_condition = models.CharField(max_length=100, blank=True, null=True, verbose_name='HEALTH CONDITION')
-    Appointment_time_duration = models.IntegerField( blank=True, null=True, verbose_name='APPOINTMENT TIME DURATION')
+    Appointment_time_duration = models.IntegerField(blank=True, null=True, verbose_name='APPOINTMENT TIME DURATION')
     Appointment_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name='APPOINTMENT NOTES')
+    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
+    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
     
 
     def __str__(self):
-        return self.Doctor_name
+        return self.Person_name
 
 class Test_result(models.Model):
+    Test_name = models.ForeignKey(Test, on_delete=models.PROTECT, null=True, verbose_name="PERSON NAME FOR RESULT")
     Unit_of_measure = models.CharField(max_length=50, blank=True, null=True, verbose_name='UNIT OF MEASURE')
     Normal_range =  models.CharField(max_length=50, blank=True, null=True, verbose_name='NORMAL RANGE') 
     Result_value =  models.CharField(max_length=50, blank=True, null=True, verbose_name='RESULT VALUE')
     X_ray = models.ImageField(upload_to='x_ray/', null=True, blank=True)
     Result_report = models.ImageField(upload_to='test_result', null=True, blank=True)
+    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
+    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
 
     def __str__(self):
         return self.Test_name
@@ -125,13 +139,96 @@ class Hospital(models.Model):
     Hospital_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='HOSPITAL NAME')
     Hospital_address = models.CharField(max_length=100, blank=True, null=True, verbose_name='HOSPITAL ADDRESS')
     Contact_details = models.IntegerField(blank=True, null=True, verbose_name='CONTACT DETAILS')
+    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
+    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
 
     def __str__(self):
         return self.Hospital_name
 
-# class Doctor_details(models.Model):
-#     Doctor_name = models.ForeignKey(Appointment, on_delete=models.PROTECT, null=True, verbose_name="DOCTOR NAME")
-#     Specialized_of = models.CharField(max_length=100, blank=True, null=True, verbose_name='SPECIALZED OF')
+class Doctor_details(models.Model):
+
+
+    Specialized = (('1','CARDIOLOGIST'),
+        ('2','AUDIOLOGIST'),
+        ('3','DENTIST'),
+        ('4','ENT SPECIALIST'),
+        ('5','GYNAECOLOGIS'),
+        ('6','ORTHOPAEDIC SURGEON'),
+        ('7','paediatrician'),
+        ('8','NEUROLOGIST'))
+
+    Doctor_name = models.ForeignKey(Appointment, on_delete=models.PROTECT, null=True, verbose_name="DOCTOR NAME")
+    Specialized_of = models.CharField(max_length=1, choices=1, default='select', verbose_name="SPECIALIZED OF")
+    E_email = models.EmailField(max_length=100, blank=True, null=True, verbose_name="Email ")
+    Qualification = models.CharField(max_length=100, blank=True, null=True, verbose_name='Qualification')
+    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
+    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
+
+    def __str__(self):
+        return self.Doctor_name
+
+class Pharmacy(models.Model):
+
+    Pharmacy_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='PHARMACY NAME')
+    Pharmacy_address = models.CharField(max_length=100, blank=True, null=True, verbose_name='PHARMACY ADDRESS')
+    Pharmacy_items = models.CharField(max_length=100, blank=True, null=True, verbose_name='PHARMACY ITEMS')
+    Syrup = models.CharField(max_length=100, blank=True, null=True, verbose_name='SYRUP')
+    Syrup_cost = models.IntegerField(blank=True, null=True, verbose_name='COST')
+
+    Ointment = models.CharField(max_length=100, blank=True, null=True, verbose_name='OINTMENT')
+    ointment_cost = models.IntegerField(blank=True, null=True, verbose_name='OINTMENT COST')
+    Lotions = models.CharField(max_length=100, blank=True, null=True, verbose_name='LOTIONS')
+    Lotion_Cost = models.IntegerField(blank=True, null=True, verbose_name='LOTION COST')
+    Total_Cost = models.IntegerField(blank=True, null=True, verbose_name='TOTAL COST')
+    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
+    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
+
+    def __str__(self):
+        return self.Pharmacy_name
+
+class Fees(models.Model):
+
+    Paid = models.IntegerField(blank=True, null=True, verbose_name='PAID')
+    Pending = models.IntegerField(blank=True, null=True, verbose_name='PENDING')
+    Invoice_id = models.IntegerField(blank=True, null=True, verbose_name='INVOICE ID')
+    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
+    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
+
+    def __str__(self):
+        return self.Paid
+
+class Invoice(models.Model):
+
+    Invoice_number = models.IntegerField(blank=True, null=True, verbose_name='INVOICE NUMBER')
+    Company_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='COMPANY NAME')
+    Invoice_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='INVOICE DATE/TIME')
+    Invoice_due_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='INVOICE DUE DATE/TIME')
+    Description = models.CharField(max_length=100, blank=True, null=True, verbose_name='DESCRIPTION')
+    Quality = models.IntegerField(blank=True, null=True, verbose_name='QUALITY')
+    Price = models.IntegerField(blank=True, null=True, verbose_name='PRICE')
+    Tax = models.IntegerField(blank=True, null=True, verbose_name='TAX')
+    Amount = models.IntegerField(blank=True, null=True, verbose_name='AMOUNT')
+    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
+    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
+
+    def __str__(self):
+        return self.Invoice_number
+
+        
+
+
+
+
 
 
 
