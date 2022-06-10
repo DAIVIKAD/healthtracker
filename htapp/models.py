@@ -53,7 +53,6 @@ class Person(models.Model):
 
     Gender = (('M','Male'),
         ('F','Female'),
-        ('M','Male'),
         ('O','Other'))
 
     Ratings = (('1', '*'),
