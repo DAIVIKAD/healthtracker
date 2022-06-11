@@ -77,31 +77,18 @@ class Person(models.Model):
     Person_dob = models.DateField(blank=True,null=True,verbose_name="DOB")
     Person_gender = models.CharField(max_length=1, choices= Gender, default='M', verbose_name="Gender")
     Person_email = models.EmailField(max_length=100, blank=True, null=True, verbose_name="Email Address")
-    Person_status = models.CharField(max_length=1, blank=True,choices=Status, default='HEALTHY', null=True, verbose_name="health status")
+    Person_status = models.CharField(max_length=10, blank=True,choices=Status, default='HEALTHY', null=True, verbose_name="health status")
     Person_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name="health notes")
     Person_rating = models.CharField(max_length=1, choices=Ratings, default='5', verbose_name="Rating")
     Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
     Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
-    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
-    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
+    updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
     
 
     def __str__(self):
         return self.Person_name
 
-class Test(models.Model):
-    Test_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='TEST NAME')
-    Test_description = models.CharField(max_length=200, blank=True, null=True, verbose_name='TEST DESCRIPTION')
-    Test_pre_condition = models.CharField(max_length=200, blank=True, null=True, verbose_name='TEST PRE-CONDITION')
-    Test_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name='TEST NOTES')
-    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
-    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
-    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
-    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
-
-
-    def __str__(self):
-        return self.Test_name
 
 class Appointment(models.Model):
     Person_name = models.ForeignKey(Person, on_delete=models.PROTECT, null=True, verbose_name="PERSON NAME")
@@ -120,7 +107,7 @@ class Appointment(models.Model):
         return self.Person_name
 
 class Test_result(models.Model):
-    Test_name = models.ForeignKey(Test, on_delete=models.PROTECT, null=True, verbose_name="PERSON NAME FOR RESULT")
+    
     Unit_of_measure = models.CharField(max_length=50, blank=True, null=True, verbose_name='UNIT OF MEASURE')
     Normal_range =  models.CharField(max_length=50, blank=True, null=True, verbose_name='NORMAL RANGE') 
     Result_value =  models.CharField(max_length=50, blank=True, null=True, verbose_name='RESULT VALUE')
@@ -132,7 +119,7 @@ class Test_result(models.Model):
     Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
 
     def __str__(self):
-        return self.Test_name
+        return self.Unit_of_measure 
 
 class Hospital(models.Model):
     Hospital_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='HOSPITAL NAME')
@@ -146,7 +133,7 @@ class Hospital(models.Model):
     def __str__(self):
         return self.Hospital_name
 
-class Doctor_details(models.Model):
+class Doctor_detail(models.Model):
 
 
     Specialized = (('1','CARDIOLOGIST'),
@@ -159,7 +146,7 @@ class Doctor_details(models.Model):
         ('8','NEUROLOGIST'))
 
     Doctor_name = models.ForeignKey(Appointment, on_delete=models.PROTECT, null=True, verbose_name="DOCTOR NAME")
-    Specialized_of = models.CharField(max_length=1, choices=1, default='select', verbose_name="SPECIALIZED OF")
+    Specialized_of = models.CharField(max_length=100, choices= Specialized, default='select', verbose_name="SPECIALIZED OF")
     E_email = models.EmailField(max_length=100, blank=True, null=True, verbose_name="Email ")
     Qualification = models.CharField(max_length=100, blank=True, null=True, verbose_name='Qualification')
     Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
@@ -255,6 +242,19 @@ class Insurance(models.Model):
 
     def __str__(self):
         return self.Insurance_type
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
