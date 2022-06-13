@@ -1,10 +1,9 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-<<<<<<< Updated upstream
+
 from .models import AppUser, Person , Hospital,  Appointment, Test_result, Doctor_detail, Pharmacy, Fees, Invoice, Fees_type, Insurance
-=======
-from .models import AppUser, Feed_back, Hospital, Laboratory, Person, Test, Appointment, Test_result, Hospital, Doctor_details, Pharmacy, Fees, Invoice, Fees_type, Insurance, Laboratory, Feed_back
->>>>>>> Stashed changes
+
+from .models import AppUser, Feed_back, Hospital, Laboratory, Person,  Appointment, Test_result, Hospital, Doctor_detail, Pharmacy, Fees, Invoice, Fees_type, Insurance, Laboratory, Feed_back
 
 from django.contrib.auth.admin  import UserAdmin
 
