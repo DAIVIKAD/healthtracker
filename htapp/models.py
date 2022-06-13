@@ -1,4 +1,4 @@
-from distutils.command.upload import upload
+4from distutils.command.upload import upload
 import re
 from sre_parse import Verbose
 from telnetlib import STATUS
@@ -53,6 +53,7 @@ class Person(models.Model):
 
     Gender = (('M','Male'),
         ('F','Female'),
+        ('M','Male'),
         ('O','Other'))
 
     Ratings = (('1', '*'),
@@ -65,8 +66,6 @@ class Person(models.Model):
         ('SICK','sick'),
         ('HEALTHY','Healthy'),
         ('UNHEALTHY','Unhealthy'))
-    
-
 
 
 
@@ -77,6 +76,7 @@ class Person(models.Model):
     Person_dob = models.DateField(blank=True,null=True,verbose_name="DOB")
     Person_gender = models.CharField(max_length=1, choices= Gender, default='M', verbose_name="Gender")
     Person_email = models.EmailField(max_length=100, blank=True, null=True, verbose_name="Email Address")
+<<<<<<< Updated upstream
     Person_status = models.CharField(max_length=10, blank=True,choices=Status, default='HEALTHY', null=True, verbose_name="health status")
     Person_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name="health notes")
     Person_rating = models.CharField(max_length=1, choices=Ratings, default='5', verbose_name="Rating")
@@ -84,6 +84,11 @@ class Person(models.Model):
     Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
     updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
     updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
+=======
+    Person_status = models.CharField(max_length=20, blank=True, null=True, verbose_name="health status")
+    Person_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name="health notes")
+    Person_rating = models.CharField(max_length=1, choices=Ratings,default=5,verbose_name="Rating")
+>>>>>>> Stashed changes
     
 
     def __str__(self):
@@ -95,30 +100,23 @@ class Appointment(models.Model):
     Doctor_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='DOCTOR NAME')
     Date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='DATE/TIME')
     Health_condition = models.CharField(max_length=100, blank=True, null=True, verbose_name='HEALTH CONDITION')
-    Appointment_time_duration = models.IntegerField(blank=True, null=True, verbose_name='APPOINTMENT TIME DURATION')
+    Appointment_time_duration = models.IntegerField(max_length=2, blank=True, null=True, verbose_name='APPOINTMENT TIME DURATION')
     Appointment_notes = models.CharField(max_length=200, blank=True, null=True, verbose_name='APPOINTMENT NOTES')
-    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
-    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
-    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
-    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
     
 
     def __str__(self):
-        return self.Person_name
+        return self.Doctor_name
 
 class Test_result(models.Model):
     
     Unit_of_measure = models.CharField(max_length=50, blank=True, null=True, verbose_name='UNIT OF MEASURE')
     Normal_range =  models.CharField(max_length=50, blank=True, null=True, verbose_name='NORMAL RANGE') 
-    Result_value =  models.CharField(max_length=50, blank=True, null=True, verbose_name='RESULT VALUE')
+    Result_value =  Unit_of_measure = models.CharField(max_length=50, blank=True, null=True, verbose_name='RESULT VALUE')
     X_ray = models.ImageField(upload_to='x_ray/', null=True, blank=True)
     Result_report = models.ImageField(upload_to='test_result', null=True, blank=True)
-    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
-    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
-    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
-    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
 
     def __str__(self):
+<<<<<<< Updated upstream
         return self.Unit_of_measure 
 
 class Hospital(models.Model):
@@ -266,6 +264,10 @@ class Insurance(models.Model):
 
 
 
+=======
+        return self.Test_name
+ 
+>>>>>>> Stashed changes
 
 
 
