@@ -244,11 +244,37 @@ class Insurance(models.Model):
         return self.Insurance_type
 
 
+class Laboratory(models.Model):
+
+    Laboratory_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='LABORATORY NAME')
+    Address = models.CharField(max_length=200, blank=True, null=True, verbose_name='ADDRESS')
+    Pin_code = models.IntegerField(blank=True, null=True, verbose_name='PIN CODE')
+    Test = models.CharField(max_length=100, blank=True, null=True, verbose_name='TEST')
+    Availability = models.CharField(max_length=100, blank=True, null=True, verbose_name='AVAILABILITY')
+    Reffered_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='REFFERED BY')
+    Added_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='ADDED BY' )
+    Added_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='ADDED DATE/TIME')
+    Updated_by = models.CharField(max_length=100, blank=True, null=True, verbose_name='UPDATED BY')
+    Updated_date_time = models.DateTimeField(max_length=100, blank=True, null=True, verbose_name='UPDATE DATE/TIME')
+
+    def __str__(self):
+        return self.Laboratory_name
 
 
+class Feed_back(models.Model):
 
+    Rating = (('1', '*'),
+        ('2','**'),
+        ('3','***'),
+        ('4','****'),
+        ('5','*****'))
+    
+    Person_name = models.ForeignKey(Person, on_delete=models.PROTECT, null=True, verbose_name="PERSON NAME")
+    Rating = models.CharField(max_length=1, choices=Rating, default='5', verbose_name="Rating")
+    Description = models.CharField(max_length=100, blank=True, null=True, verbose_name='Description')
 
-
+    def __str__(self):
+        return self.Person_name
 
 
 
