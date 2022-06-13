@@ -1,6 +1,10 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
+<<<<<<< Updated upstream
 from .models import AppUser, Person , Hospital,  Appointment, Test_result, Doctor_detail, Pharmacy, Fees, Invoice, Fees_type, Insurance
+=======
+from .models import AppUser, Feed_back, Hospital, Laboratory, Person, Test, Appointment, Test_result, Hospital, Doctor_details, Pharmacy, Fees, Invoice, Fees_type, Insurance, Laboratory, Feed_back
+>>>>>>> Stashed changes
 
 from django.contrib.auth.admin  import UserAdmin
 
@@ -35,7 +39,7 @@ admin.site.register(Fees)
 admin.site.register(Invoice)
 admin.site.register(Fees_type)
 admin.site.register(Insurance)
-
+admin.site.register(Feed_back)
 
 
 
