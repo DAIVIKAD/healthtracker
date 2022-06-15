@@ -16,12 +16,45 @@ class API_Person(APIview):
        return Response(serializer.data)
 
    def  post(self, request):
-        serializer = customerSerializer(data=request.data)  
+        serializer = PersonSerializer(data=request.data)  
+
+        if serializer.is_valid():
+            serializer.save():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)  
+
+
+class API_Hospital(APIview):
+   def get(self, request):
+       Person = Hospital.objects.all().order_by('id')
+       serializer = Hospitalserializers(Person, many=True)
+       return Response(serializer.data)
+
+   def  post(self, request):
+        serializer = HospitalSerializer(data=request.data)  
 
         if serializer.is_valid():
             serializer.save():
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)    
+
+
+class API_Appointment(APIview):
+   def get(self, request):
+       Person = Appointment.objects.all().order_by('id')
+       serializer = Appointmentserializers(Person, many=True)
+       return Response(serializer.data)
+
+   def  post(self, request):
+        serializer = AppointmentSerializer(data=request.data)  
+
+        if serializer.is_valid():
+            serializer.save():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)    
+
+
+
      
 # Create your views here.
 
