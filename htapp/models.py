@@ -107,17 +107,7 @@ class Appointment(models.Model):
     def __str__(self):
         return self.Doctor_name
 
-#class Test_result(models.Model):
-    
-   
-   # Normal_range =  models.CharField(max_length=50, blank=True, null=True, verbose_name='NORMAL RANGE') 
-    #Result_value =  Unit_of_measure = models.CharField(max_length=50, blank=True, null=True, verbose_name='RESULT VALUE')
-    #X_ray = models.ImageField(upload_to='x_ray/', null=True, blank=True)
-    #Result_report = models.ImageField(upload_to='test_result', null=True, blank=True)
 
-    #def __str__(self):
-
-     #   return self.Normal_range
 
 class Hospital(models.Model):
     Hospital_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='HOSPITAL NAME')
@@ -274,7 +264,30 @@ class Feed_back(models.Model):
     def __str__(self):
         return self.Person_name
 
+class Result_test(models.Model):
+    
+    Name_test    =  models.CharField(max_length=50, blank=True, null=True, verbose_name='NAME OF TEST') 
+    Normal_range =  models.CharField(max_length=50, blank=True, null=True, verbose_name='NORMAL RANGE') 
+    Result_value =  models.CharField(max_length=50, blank=True, null=True, verbose_name='RESULT VALUE')
+    X_ray = models.ImageField(upload_to='X_ray/', null=True, blank=True)
+    Result_report = models.ImageField(upload_to='test_result/', null=True, blank=True)
 
+    def __str__(self):
+
+       return self.Name_test
+
+
+class Health_test(models.Model):
+    Ref_by_doc   = models.CharField(max_length=50, blank=True, null=True, verbose_name='NAME OF DOC') 
+    Name_test    =  models.CharField(max_length=50, blank=True, null=True, verbose_name='NAME OF TEST') 
+    Date_test =  models.DateTimeField(max_length=50, blank=True, null=True, verbose_name='DATE OF TEST') 
+    Date_result =  models.DateTimeField(max_length=50, blank=True, null=True, verbose_name='RESULT DATE ')
+    Prescribed_date = models.DateTimeField(max_length=50, blank=True, null=True, verbose_name='PRESCRIBED DATE ')
+    Description = models.CharField(max_length=50, blank=True, null=True, verbose_name='PRESCRIBED DATE ')
+
+    def __str__(self):
+
+       return self. Ref_by_doc
 
 
 
