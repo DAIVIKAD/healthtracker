@@ -1,4 +1,5 @@
 from re import T
+from urllib import request
 from django.shortcuts import render
 from rest_framework import Permissions, status
 from rest_framework.decorators import api_view
@@ -7,7 +8,7 @@ from rest_framework.views import APIview
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_password
 from .models import  Person , Hospital,  Appointment,  Doctor_detail, Pharmacy, Fees, Invoice, Fees_type, Insurance, Laboratory, Feed_back, Result_test, Health_test
-from .serializers import Personserializers , Hospitalserializers,  Appointmentserializers,  Doctor_detailserializers, Pharmacyserializers, Feesserializers, Invoiceserializers, Fees_typeserializers, Insuranceserializers, Laboratoryserializers, Feed_backserializers, Result_testserializers, Health_testserializers
+from .serializers import PersonSerializer, Personserializers , Hospitalserializers,  Appointmentserializers,  Doctor_detailserializers, Pharmacyserializers, Feesserializers, Invoiceserializers, Fees_typeserializers, Insuranceserializers, Laboratoryserializers, Feed_backserializers, Result_testserializers, Health_testserializers
 
 class API_Person(APIview):
    def get(self, request):
@@ -22,6 +23,28 @@ class API_Person(APIview):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)  
+
+
+@api_view(['GET','PUT'])
+def Person_detail(request,pk):
+    try:
+        Person = Person.objects.get(pk=pk)
+    expect Persons.DoesNotExist:
+        return Response(status=status.HTTP_400_NO_FOUND)
+
+    If request.method =='GET':
+       serializers = PersonSerializer(Person)
+       return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializers = PersonSerializer(Person,data=request.data)
+        if serializer.is_valid():
+           serializer.save()
+           return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)         
+
+
+
 
 
 class API_Hospital(APIview):
@@ -128,7 +151,7 @@ class API_Fees_type(APIview):
 
 class API_Insurance(APIview):
    def get(self, request):
-       Insurance = Fees_type.objects.all().order_by('id')
+       Insurance = Insurance.objects.all().order_by('id')
        serializer = InsuranceSerializers(Insurance, many=True)
        return Response(serializer.data)
 
