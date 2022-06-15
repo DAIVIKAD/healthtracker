@@ -14,20 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from django.urls import re_path as url
 from htapp import views
 from rest_framework.urlpatterns import format_suffix_patterns
-from rest_framework import router, serializers
-from . import router
+from rest_framework import routers, serializers
 from django.conf import settings
 from django.conf.urls.static import static
 
-router = routers.DefaultRoter()
+router = routers.DefaultRouter()
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^api/person/', views.API_Person.as_view()),
+    path('api/',include(router.urls)),
+    url(r'^api/persons/', views.API_Person.as_view()),
     url(r'^api/hospital/', views.API_Hospital.as_view()),
     url(r'^api/appointment/', views.API_Appointment.as_view()),
     url(r'^api/doctor_detail/', views.API_Doctor_detail.as_view()),
@@ -35,7 +36,7 @@ urlpatterns = [
     url(r'^api/fees/', views.API_Fees.as_view()),
     url(r'^api/invoice/', views.API_Invoice.as_view()),
     url(r'^api/fees_type/', views.API_Fees_type.as_view()),
-    url(r'^api/insurance/', views.API_Insurance_view()),
+    url(r'^api/insurance/', views.API_Insurance.as_view()),
     url(r'^api/laboratory/', views.API_Laboratory.as_view()),
     url(r'^api/feed_back/', views.API_Feed_back.as_view()),
     url(r'^api/result_test/', views.API_Result_test.as_view()),

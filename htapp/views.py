@@ -1,19 +1,19 @@
 from re import T
 from urllib import request
 from django.shortcuts import render
-from rest_framework import Permissions, status
+from rest_framework import permissions, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIview
+from rest_framework.views import APIView
 from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_password
+from django.contrib.auth.decorators import login_required
 from .models import  Person , Hospital,  Appointment,  Doctor_detail, Pharmacy, Fees, Invoice, Fees_type, Insurance, Laboratory, Feed_back, Result_test, Health_test
-from .serializers import  PersonSerializers , HospitalSerializers,  AppointmentSerializers,  Doctor_detailSerializers, PharmacySerializers, FeesSerializers, InvoiceSerializers, Fees_typeSerializers, InsuranceSerializers, LaboratorySerializers, Feed_backSerializers, Result_testSerializers, Health_testSerializers
+from .serializers import  PersonSerializer, HospitalSerializer,  AppointmentSerializer,  Doctor_detailSerializer, PharmacySerializer, FeesSerializer, InvoiceSerializer, Fees_typeSerializer, InsuranceSerializer, LaboratorySerializer, Feed_backSerializer, Result_testSerializer, Health_testSerializer
 
-class API_Person(APIview):
+class API_Person(APIView):
    def get(self, request):
-       Person = Person.objects.all().order_by('id')
-       serializer = PersonSerializer  (Person, many=True)
+       Persons = Person.objects.all().order_by('id')
+       serializer = PersonSerializer(Persons, many=True)
        return Response(serializer.data)
 
    def  post(self, request):
@@ -22,22 +22,22 @@ class API_Person(APIview):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)  
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 
 @api_view(['GET','PUT'])
 def Person_detail(request,pk):
     try:
-        Person = person.objects.get(pk=pk)
-    except Person.DoesNotExist:
+        Persons = Person.objects.get(pk=pk)
+    except Persons.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = PersonSerializer(Person)
+       serializer = PersonSerializer(Persons)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = PersonSerializer(Person,data=request.data)
+        serializer = PersonSerializer(Persons,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -47,9 +47,9 @@ def Person_detail(request,pk):
 
 
 
-class API_Hospital(APIview):
+class API_Hospital(APIView):
    def get(self, request):
-       Hospital = Hospital.objects.all().order_by('id')
+       Hospitals = Hospital.objects.all().order_by('id')
        serializer = HospitalSerializer(Hospital, many=True)
        return Response(serializer.data)
 
@@ -59,12 +59,12 @@ class API_Hospital(APIview):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 
 @api_view(['GET','PUT'])
 def Hospital_detail(request,pk):
     try:
-        Hospital = hospital.objects.get(pk=pk)
+        Hospitals = Hospital.objects.get(pk=pk)
     except Hospital.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
@@ -73,7 +73,7 @@ def Hospital_detail(request,pk):
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = HospitalSerializer(Hospital,data=request.data)
+        serializer = HospitalSerializer(Hospital,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -81,7 +81,7 @@ def Hospital_detail(request,pk):
 
 
 
-class API_Appointment(APIview):
+class API_Appointment(APIView):
    def get(self, request):
        Appointment = Appointment.objects.all().order_by('id')
        serializer = AppointmentSerializer(Appointment, many=True)
@@ -115,7 +115,7 @@ def Appointment_detail(request,pk):
 
             
 
-class API_Doctor_detail(APIview):
+class API_Doctor_detail(APIView):
      def get(self, request):
        Doctor_detail = Doctor_detail.objects.all().order_by('id')
        serializer = Doctor_detailSerializer(Doctor_detail, many=True)
@@ -148,7 +148,7 @@ def Doctor_detail_detail(request,pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)         
 
 
-class API_Pharmacy(APIview):
+class API_Pharmacy(APIView):
    def get(self, request):
        Pharmacy = Pharmacy.objects.all().order_by('id')
        serializer = PharmacySerializer(Pharmacy, many=True)
@@ -181,7 +181,7 @@ def Pharmacy_detail(request,pk):
            return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-class API_Fees(APIview):
+class API_Fees(APIView):
      def get(self, request):
        Fees = Fees.objects.all().order_by('id')
        serializer = FeesSerializers(Fees, many=True)
@@ -214,7 +214,7 @@ def Fees_detail(request,pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)         
 
 
-class API_Invoice(APIview):
+class API_Invoice(APIView):
      def get(self, request):
        Invoice = Invoice.objects.all().order_by('id')
        serializer = InvoiceSerializer(Invoice, many=True)
@@ -246,7 +246,7 @@ def Invoice_detail(request,pk):
            return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)         
    
-class API_Fees_type(APIview):
+class API_Fees_type(APIView):
    def get(self, request):
        Fees_type = Fees_type.objects.all().order_by('id')
        serializer = Fees_typeSerializer(Fees_type, many=True)
@@ -280,7 +280,7 @@ def Fees_type_detail(request,pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class API_Insurance(APIview):
+class API_Insurance(APIView):
    def get(self, request):
        Insurance = Insurance.objects.all().order_by('id')
        serializer = InsuranceSerializers(Insurance, many=True)
@@ -312,7 +312,7 @@ def Insurance_detail(request,pk):
            return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)        
 
-class API_Laboratory(APIview):
+class API_Laboratory(APIView):
    def get(self, request):
        Laboratory =  Laboratory.objects.all().order_by('id')
        serializer =  LaboratorySerializer( Laboratory, many=True)
@@ -345,7 +345,7 @@ def Laboratory_detail(request,pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)         
 
 
-class API_Feed_back(APIview):
+class API_Feed_back(APIView):
    def get(self, request):
        Feed_back =  Feed_back.objects.all().order_by('id')
        serializer =  Feed_backSerializers( Feed_back, many=True)
@@ -379,7 +379,7 @@ def Feed_back_detail(request,pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)         
 
 
-class API_Result_test(APIview):
+class API_Result_test(APIView):
    def get(self, request):
        Result_test =  Result_test.objects.all().order_by('id')
        serializer =  Result_testSerializer( Result_test, many=True)
@@ -412,7 +412,7 @@ def Result_test_detail(request,pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)         
 
 
-class API_Health_test(APIview):
+class API_Health_test(APIView):
    def get(self, request):
        Health_test =  Health_test.objects.all().order_by('id')
        serializer =  Health_testSerializers(Health_test , many=True)
