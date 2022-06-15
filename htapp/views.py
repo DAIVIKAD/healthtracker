@@ -27,7 +27,7 @@ class API_Person(APIview):
 class API_Hospital(APIview):
    def get(self, request):
        Person = Hospital.objects.all().order_by('id')
-       serializer = Hospitalserializers(Person, many=True)
+       serializer = Hospitalserializers(Hospital, many=True)
        return Response(serializer.data)
 
    def  post(self, request):
@@ -42,7 +42,7 @@ class API_Hospital(APIview):
 class API_Appointment(APIview):
    def get(self, request):
        Person = Appointment.objects.all().order_by('id')
-       serializer = Appointmentserializers(Person, many=True)
+       serializer = Appointmentserializers(Appointment, many=True)
        return Response(serializer.data)
 
    def  post(self, request):
@@ -53,6 +53,19 @@ class API_Appointment(APIview):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)    
 
+class API_Doctor_detail(APIview):
+   def get(self, request):
+       Person = Appointment.objects.all().order_by('id')
+       serializer = Appointmentserializers(Doctor_details, many=True)
+       return Response(serializer.data)
+
+   def  post(self, request):
+        serializer = Doctor_detailSerializer(data=request.data)  
+
+        if serializer.is_valid():
+            serializer.save():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)  
 
 
      
