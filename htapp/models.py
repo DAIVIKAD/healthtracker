@@ -201,7 +201,7 @@ class Invoice(models.Model):
 
 class Fees_type(models.Model):
 
-    Cunsultancy_fees = models.IntegerField(blank=True, null=True, verbose_name='CUNSULTANCY FEES')
+    Cunsultancy_fees = models.IntegerField(blank=True, null=True, verbose_name='CONSULTANCY FEES')
     Laboratory_fees = models.IntegerField(blank=True, null=True, verbose_name='LABORATORY FEES')
     Pharmacy_fees = models.IntegerField(blank=True, null=True, verbose_name='PHARMACY FEES')
     Other_fees = models.IntegerField(blank=True, null=True, verbose_name='OTHER FEES')
