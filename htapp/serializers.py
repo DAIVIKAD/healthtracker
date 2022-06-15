@@ -1,7 +1,7 @@
 from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
-from htapp.models import AppUser, Person , Hospital,  Appointment,  Doctor_detail, Pharmacy, Fees, Invoice, Fees_type, Insurance,Laboratory, Feed_back
+from htapp.models import AppUser, Person , Hospital,  Appointment,  Doctor_detail, Pharmacy, Fees, Invoice, Fees_type, Insurance, Laboratory, Feed_back, Result_test, Health_test
 
 class PersonSerializer(serializers.ModelSerializers):
     class Meta:
@@ -60,3 +60,13 @@ class Feed_backSerializer(serializers.ModelSerializers):
     class Meta:
         model = Feed_back
         fields = '__all__'            
+
+class Result_testSerializer(serializers.ModelSerializers):
+    class Meta:
+        model = Result_test
+        fields = '__all__'   
+
+class Health_testSerializer(serializers.ModelSerializers):
+    class Meta:
+        model = Health_test
+        fields = '__all__'                         
