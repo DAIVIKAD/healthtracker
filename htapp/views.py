@@ -50,7 +50,7 @@ def Person_detail(request,pk):
 class API_Hospital(APIView):
    def get(self, request):
        Hospitals = Hospital.objects.all().order_by('id')
-       serializer = HospitalSerializer(Hospital, many=True)
+       serializer = HospitalSerializer(Hospitals, many=True)
        return Response(serializer.data)
 
    def  post(self, request):
@@ -65,15 +65,15 @@ class API_Hospital(APIView):
 def Hospital_detail(request,pk):
     try:
         Hospitals = Hospital.objects.get(pk=pk)
-    except Hospital.DoesNotExist:
+    except Hospitals.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = HospitalSerializer(Hospital)
+       serializer = HospitalSerializer(Hospitals)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = HospitalSerializer(Hospital,data=request.data)
+        serializer = HospitalSerializer(Hospitals,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -83,8 +83,8 @@ def Hospital_detail(request,pk):
 
 class API_Appointment(APIView):
    def get(self, request):
-       Appointment = Appointment.objects.all().order_by('id')
-       serializer = AppointmentSerializer(Appointment, many=True)
+       Appointments = Appointment.objects.all().order_by('id')
+       serializer = AppointmentSerializer(Appointments, many=True)
        return Response(serializer.data)
 
    def  post(self, request):
@@ -93,21 +93,21 @@ class API_Appointment(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 @api_view(['GET','PUT'])
 def Appointment_detail(request,pk):
     try:
-        Appointment = appointment.objects.get(pk=pk)
-    except Appointment.DoesNotExist:
+        Appointments = Appointment.objects.get(pk=pk)
+    except Appointments.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = AppointmentSerializer(Appointment)
+       serializer = AppointmentSerializer(Appointments)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = AppointmentSerializer(Appointment,data=request.data)
+        serializer = AppointmentSerializer(Appointments,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -117,8 +117,8 @@ def Appointment_detail(request,pk):
 
 class API_Doctor_detail(APIView):
      def get(self, request):
-       Doctor_detail = Doctor_detail.objects.all().order_by('id')
-       serializer = Doctor_detailSerializer(Doctor_detail, many=True)
+       Doctor_details = Doctor_detail.objects.all().order_by('id')
+       serializer = Doctor_detailSerializer(Doctor_details, many=True)
        return Response(serializer.data)
 
      def  post(self, request):
@@ -127,21 +127,21 @@ class API_Doctor_detail(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)  
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 @api_view(['GET','PUT'])
 def Doctor_detail_detail(request,pk):
     try:
-        Doctor_detail = doctor_detail.objects.get(pk=pk)
-    except Doctor_detail.DoesNotExist:
+        Doctor_details = Doctor_detail.objects.get(pk=pk)
+    except Doctor_details.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = Doctor_detailSerializer(Doctor_detail)
+       serializer = Doctor_detailSerializer(Doctor_details)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = Doctor_detailSerializer(Doctor_detail,data=request.data)
+        serializer = Doctor_detailSerializer(Doctor_details,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -150,8 +150,8 @@ def Doctor_detail_detail(request,pk):
 
 class API_Pharmacy(APIView):
    def get(self, request):
-       Pharmacy = Pharmacy.objects.all().order_by('id')
-       serializer = PharmacySerializer(Pharmacy, many=True)
+       Pharmacys = Pharmacy.objects.all().order_by('id')
+       serializer = PharmacySerializer(Pharmacys, many=True)
        return Response(serializer.data)
 
    def  post(self, request):
@@ -160,22 +160,22 @@ class API_Pharmacy(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)  
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 
 @api_view(['GET','PUT'])
 def Pharmacy_detail(request,pk):
     try:
-        Pharmacy = pharmacy.objects.get(pk=pk)
-    except Pharmacy.DoesNotExist:
+        Pharmacys = Pharmacy.objects.get(pk=pk)
+    except Pharmacys.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = PharmacySerializer(Person)
+       serializer = PharmacySerializer(Pharmacy)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = PharmacySerializer(Pharmacy,data=request.data)
+        serializer = PharmacySerializer(Pharmacys,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -183,8 +183,8 @@ def Pharmacy_detail(request,pk):
 
 class API_Fees(APIView):
      def get(self, request):
-       Fees = Fees.objects.all().order_by('id')
-       serializer = FeesSerializers(Fees, many=True)
+       Feess = Fees.objects.all().order_by('id')
+       serializer = FeesSerializer(Feess, many=True)
        return Response(serializer.data)
 
      def  post(self, request):
@@ -193,21 +193,21 @@ class API_Fees(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)  
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 @api_view(['GET','PUT'])
 def Fees_detail(request,pk):
     try:
-        Fees = Fees.objects.get(pk=pk)
-    except Fees.DoesNotExist:
+        Feess = Fees.objects.get(pk=pk)
+    except Feess.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = FeesSerializer(Fees)
+       serializer = FeesSerializer(Feess)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = FeesSerializer(Fees,data=request.data)
+        serializer = FeesSerializer(Feess,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -216,8 +216,8 @@ def Fees_detail(request,pk):
 
 class API_Invoice(APIView):
      def get(self, request):
-       Invoice = Invoice.objects.all().order_by('id')
-       serializer = InvoiceSerializer(Invoice, many=True)
+       Invoices = Invoice.objects.all().order_by('id')
+       serializer = InvoiceSerializer(Invoices, many=True)
        return Response(serializer.data)
 
      def  post(self, request):
@@ -226,21 +226,21 @@ class API_Invoice(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)  
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 @api_view(['GET','PUT'])
 def Invoice_detail(request,pk):
     try:
-        Invoice = fees.objects.get(pk=pk)
-    except Fees.DoesNotExist:
+        Invoices = Invoice.objects.get(pk=pk)
+    except Invoices.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = InvoiceSerializer(Invoice)
+       serializer = InvoiceSerializer(Invoices)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = InvoiceSerializer(Invoice,data=request.data)
+        serializer = InvoiceSerializer(Invoices,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -248,8 +248,8 @@ def Invoice_detail(request,pk):
    
 class API_Fees_type(APIView):
    def get(self, request):
-       Fees_type = Fees_type.objects.all().order_by('id')
-       serializer = Fees_typeSerializer(Fees_type, many=True)
+       Fees_types = Fees_type.objects.all().order_by('id')
+       serializer = Fees_typeSerializer(Fees_types, many=True)
        return Response(serializer.data)
 
    def  post(self, request):
@@ -258,22 +258,22 @@ class API_Fees_type(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)  
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 
 @api_view(['GET','PUT'])
 def Fees_type_detail(request,pk):
     try:
-        Fees_type = fees_type.objects.get(pk=pk)
-    except Fees_type.DoesNotExist:
+        Fees_types = Fees_type.objects.get(pk=pk)
+    except Fees_types.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = Fees_typeSerializer(Fees_type)
+       serializer = Fees_typeSerializer(Fees_types)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = Fees_typeSerializer(Fees_type,data=request.data)
+        serializer = Fees_typeSerializer(Fees_type,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -282,8 +282,8 @@ def Fees_type_detail(request,pk):
 
 class API_Insurance(APIView):
    def get(self, request):
-       Insurance = Insurance.objects.all().order_by('id')
-       serializer = InsuranceSerializers(Insurance, many=True)
+       Insurances = Insurance.objects.all().order_by('id')
+       serializer = InsuranceSerializer(Insurance, many=True)
        return Response(serializer.data)
 
    def  post(self, request):
@@ -292,21 +292,21 @@ class API_Insurance(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)  
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 @api_view(['GET','PUT'])
 def Insurance_detail(request,pk):
     try:
-        Insurance = insurance.objects.get(pk=pk)
-    except Insurance.DoesNotExist:
+        Insurances = Insurance.objects.get(pk=pk)
+    except Insurances.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = InsuranceSerializer(Insurance)
+       serializer = InsuranceSerializer(Insurances)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = InsuranceSerializer(Insurance,data=request.data)
+        serializer = InsuranceSerializer(Insurances,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -314,8 +314,8 @@ def Insurance_detail(request,pk):
 
 class API_Laboratory(APIView):
    def get(self, request):
-       Laboratory =  Laboratory.objects.all().order_by('id')
-       serializer =  LaboratorySerializer( Laboratory, many=True)
+       Laboratorys =  Laboratory.objects.all().order_by('id')
+       serializer =  LaboratorySerializer( Laboratorys, many=True)
        return Response(serializer.data)
 
    def  post(self, request):
@@ -324,21 +324,21 @@ class API_Laboratory(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST) 
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
 @api_view(['GET','PUT'])
 def Laboratory_detail(request,pk):
     try:
-        Laboratory = laboratory.objects.get(pk=pk)
-    except Laboratory.DoesNotExist:
+        Laboratorys = Laboratory.objects.get(pk=pk)
+    except Laboratorys.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = LaboratorySerializer(Laboratory)
+       serializer = LaboratorySerializer(Laboratory)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = LaboratorySerializer(Laboratory,data=request.data)
+        serializer = LaboratorySerializer(Laboratorys,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -347,8 +347,8 @@ def Laboratory_detail(request,pk):
 
 class API_Feed_back(APIView):
    def get(self, request):
-       Feed_back =  Feed_back.objects.all().order_by('id')
-       serializer =  Feed_backSerializers( Feed_back, many=True)
+       Feed_backs =  Feed_back.objects.all().order_by('id')
+       serializer =  Feed_backSerializer( Feed_backs, many=True)
        return Response(serializer.data)
 
    def  post(self, request):
@@ -357,22 +357,22 @@ class API_Feed_back(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)  
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 
 @api_view(['GET','PUT'])
 def Feed_back_detail(request,pk):
     try:
-        Feed_back= feed_back.objects.get(pk=pk)
-    except Feed_back.DoesNotExist:
+        Feed_backs = Feed_back.objects.get(pk=pk)
+    except Feed_backs.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = Feed_backSerializer(Feed_back)
+       serializer = Feed_backSerializer(Feed_backs)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = Feed_backSerializer(Feed_back,data=request.data)
+        serializer = Feed_backSerializer(Feed_back,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -381,8 +381,8 @@ def Feed_back_detail(request,pk):
 
 class API_Result_test(APIView):
    def get(self, request):
-       Result_test =  Result_test.objects.all().order_by('id')
-       serializer =  Result_testSerializer( Result_test, many=True)
+       Result_tests =  Result_test.objects.all().order_by('id')
+       serializer =  Result_testSerializer( Result_tests, many=True)
        return Response(serializer.data)
 
    def  post(self, request):
@@ -391,21 +391,21 @@ class API_Result_test(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 
 @api_view(['GET','PUT'])
 def Result_test_detail(request,pk):
     try:
-        Result_test = result_test.objects.get(pk=pk)
-    except Result_test.DoesNotExist:
+        Result_tests = Result_test.objects.get(pk=pk)
+    except Result_tests.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = Result_testSerializer(Result_test)
+       serializer = Result_testSerializer(Result_tests)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = Result_testSerializer(Result_test,data=request.data)
+        serializer = Result_testSerializer(Result_test,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)
@@ -414,8 +414,8 @@ def Result_test_detail(request,pk):
 
 class API_Health_test(APIView):
    def get(self, request):
-       Health_test =  Health_test.objects.all().order_by('id')
-       serializer =  Health_testSerializers(Health_test , many=True)
+       Health_tests =  Health_test.objects.all().order_by('id')
+       serializer =  Health_testSerializer(Health_tests, many=True)
        return Response(serializer.data)
 
    def  post(self, request):
@@ -424,22 +424,22 @@ class API_Health_test(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST) 
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
 
 @api_view(['GET','PUT'])
 def Health_test_detail(request,pk):
     try:
-        Health_test = health_test.objects.get(pk=pk)
+        Health_tests = Health_test.objects.get(pk=pk)
     except Health_test.DoesNotExist:
         return Response(status=status.HTTP_400_NO_FOUND)
 
     if request.method =='GET':
-       serializers = Health_testSerializer(Health_test)
+       serializer = Health_testSerializer(Health_tests)
        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializers = Health_testSerializer(Health_test,data=request.data)
+        serializer = Health_testSerializer(Health_tests,data=request.data)
         if serializer.is_valid():
            serializer.save()
            return Response(serializer.data)

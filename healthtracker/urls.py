@@ -28,7 +28,7 @@ router = routers.DefaultRouter()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include(router.urls)),
-    url(r'^api/persons/', views.API_Person.as_view()),
+    url(r'^api/person/', views.API_Person.as_view()),
     url(r'^api/hospital/', views.API_Hospital.as_view()),
     url(r'^api/appointment/', views.API_Appointment.as_view()),
     url(r'^api/doctor_detail/', views.API_Doctor_detail.as_view()),
@@ -41,4 +41,10 @@ urlpatterns = [
     url(r'^api/feed_back/', views.API_Feed_back.as_view()),
     url(r'^api/result_test/', views.API_Result_test.as_view()),
     url(r'^api/health_test/', views.API_Health_test.as_view()),
+    path('Person/<int:pk',views.Person_detail),
+    path('Hospital/<int:pk',views.Hospital_detail),
+    path('Appointment/<int:pk',views.Appointment_detail),
+    path('Person/<int:pk',views.Person_detail),
+    path('Person/<int:pk',views.Person_detail),
+    
 ]

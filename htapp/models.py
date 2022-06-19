@@ -283,7 +283,7 @@ class Health_test(models.Model):
     Date_test =  models.DateTimeField(max_length=50, blank=True, null=True, verbose_name='DATE OF TEST') 
     Date_result =  models.DateTimeField(max_length=50, blank=True, null=True, verbose_name='RESULT DATE ')
     Prescribed_date = models.DateTimeField(max_length=50, blank=True, null=True, verbose_name='PRESCRIBED DATE ')
-    Description = models.CharField(max_length=50, blank=True, null=True, verbose_name='PRESCRIBED DATE ')
+    Description = models.CharField(max_length=50, blank=True, null=True, verbose_name='DESCRIPTION')
 
     def __str__(self):
 
