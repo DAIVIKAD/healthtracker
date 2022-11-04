@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %} HEALTH TRACKER{% endblock %}</title>
+              {% block head_css_site %}
+                <link href="{%static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" >
+                <link href="{%static 'css/styles.min.css' %}" rel="stylesheet" >
+                <link href="{%static 'css/common.css' %}" rel="stylesheet" >
+            {% endblock head_css_site %}
+
+        {% block head_favicon %}
+            <link rel="icon" type="image/png" href="{%static 'images/favicon.ico' %}">
+        {% endblock head_favicon %}
+
+        <!-- bootstrap -->
+        <script src="{%static 'js/jquery.min.js' %}"></script>
+        <script src="{%static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+        <!-- custom css -->
+       
+        <!-- custom js -->
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+{# Navigation Menu #}
+    <header>
+            <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+              <div class="row title-bar" style= "height: 60px;">   
+  
+              {% if user.is_authenticated  %}
+               {% if  user.is_staff %}
+                <div class="navbar navbar-inverse navbar-fixed-left" style="height: 60px;margin-bottom: 0px; padding-top: 15px;">
+                  <a class="navbar-brand" href="{% url 'home' %}"; font-size:30px; padding-bottom: 10px;>HEALTH TRACKER</a>
+                  <a class="nav-link" font-size:20px; style="margin: 14px 10px 10px 20px;" href="{% url '' %}" ><strong>HELP </a>
+                  <a class="nav-link" font-size:20px; style="margin: 14px 10px 10px 10px;" href="{% url '' %}" ><strong>My Doc</a>  
+                  <a class="nav-link" font-size:20px; style="margin: 14px 10px 10px 10px;" href="{% url '' %}" ><strong>Customer Profile</a>    
+                  <a class="nav-link" font-size:20px; style="margin: 14px 10px 10px 10px;" href="{% url '' %}" ><strong>Feed back</a>
+                  <a class="nav-link"  font-size:20px;  style="margin: 14px 10px 10px 10px;" href=""><strong>Reports</a>
+
+                  <a class="nav-item" style="margin: 14px 0px 0px 80px;  padding-top: 10px;"> WELCOME {{ user.username }}</strong></a>
+                   <a class="nav-item text-warning" role="presentation" font-size: 20px; style="margin: 14px 0px 0px 25px;"href="{% url 'logout' %}"><strong>LOGOUT</strong></a>
+                </div> 
+                {% else %}
+                <div class="navbar navbar-inverse navbar-fixed-left" style="height: 60px;margin-bottom: 0px; padding-top: 0px;">
+                  <a class="navbar-brand"  href="{% url 'home' %}"; font-size:30px; padding-top: 0px;>HEALTH MANAGEMENT SYSTEM</a>
+
+                  <a class="nav-link" font-size:20px; style="margin: 14px 10px 10px 10px;" href="{% url '' %}" ><strong>My Docs</a>
+                  <a class="nav-link" font-size:20px; style="margin: 14px 10px 10px 10px;" href="{% url '' %}" ><strong>Feed back </a>  
+
+                  <a class="nav-item" style="margin: 14px 0px 0px 480px;  padding-top: 10px;"> WELCOME {{ user.username }}</strong></a>
+                   <a class="nav-item text-warning" role="presentation" font-size: 20px; style="margin: 14px 0px 0px 25px;"href="{% url 'logout' %}"><strong>LOGOUT</strong></a>
+                </div> 
+                {% endif %}
+
+              {% endif %}
+          </div>
+        </div>
+    </header>
+    <div>
+        {% if messages %}
+          {% for message in messages %}
+            <div style="border-radius:0;" {% if message.tags %} class="alert alert-icon alert-{{ message.tags }} alert-dismissible fade show mb-0" role="alert" {% endif %}>
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        {% endif %}
+    </div>
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+      {# The Footer #}
+        <div class="footer">
+            <div class="container">
+                <p> © Copyright 2020 - 2021 : Health Tracker/ CSDC All Rights Reserved Worldwide </p>
+            </div>
+        </div>
+
+
+    {% block scripts %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/script.min.js' %}"></script>
+    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+    {% endblock scripts %}
+
+    {% block extrascripts %}
+    {% endblock extrascripts %}
+</body>
+
+
+</html>
+
+

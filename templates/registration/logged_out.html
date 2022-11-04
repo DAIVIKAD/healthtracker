@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class='container'>
+ <span class="border border-primary">
+  
+       <legend class ='text-center'>Thank you</legend>
+
+       <legend class ='text-center'>Hope you enjoyed working and had a productive time using HEALTH TRACKER </legend>
+
+
+         <p id="innerPara" class="text-md-center"> </p>
+         <div style="text-align: center">You have been Logged out successfully!
+         </div>
+
+
+
+         <div style="text-align: center"> Incase you missed something and want to return .......
+         </div>
+
+       	<div style="text-align: center">
+       		<a href="{% url 'login'%}" class="text-md-center">Click here to login again.</a>
+  		</div>
+ </span>
+ </div>
+
+ 
+  
+{% endblock %}

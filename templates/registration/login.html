@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Helath Tracker
+		</title>
+		<!-- icon -->
+		<link rel="shortcut icon" href="{%static 'img/favicon.ico' %}">
+		<!-- bootstrap -->
+		<script src="{%static 'js/jquery.min.js' %}"></script>
+		<link
+			rel="stylesheet"
+			href="{%static 'bootstrap/css/bootstrap.min.css' %}"
+		/>
+		<script src="{%static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+		<!-- custom css -->
+		<link rel="stylesheet" href="{%static 'css/common.css' %}">
+		<link rel="stylesheet" href="{%static 'css/login-page.css' %}">
+		<!-- custom js -->
+		<script src="{%static 'js/anim.js' %}"></script>
+		<script src="{%static 'js/anim2.js' %}"></script>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="row title-bar">
+				<div class="iconHolder col-sm-6">
+					<img
+						src="{%static 'img/logo/softbee_logo.jpg' %}"
+						width="220px"
+						height="50px"
+						class="logo"
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="mainArea">
+			<!-- login page code starts-->
+			<div class="welcomeText"> Health Management System </div>
+
+					
+			{% block content %}
+
+				{% if form.errors %}
+				  <p>Your Username and Password didn't match. Please try again with correct credentials.</p>
+				{% endif %}
+
+				{% if next %}
+				  {% if user.is_authenticated %}
+				    <p>Your account doesn't have access to this page. To proceed,
+				    please login with credentials for an account that has access!.</p>
+				  {% else %}
+				    <p>Unauthorized Access Denied. Please login to access this page.</p>
+				  {% endif %}
+				{% endif %}
+
+
+
+				<form data-bs-hover-animate="flash" method="post" action="{% url 'login' %}">
+				   <div class="form-row">
+				     <div class="col">
+				  {% csrf_token %}
+
+				      <div class="col" style="margin: 0px 0px 0px 800px;">
+				        <div style="width: 450px;padding: 50px;margin: 0px;">
+				          <h5 class = "text-warning" font-size:20px; >Please &nbsp;Enter Your Login Credentials</h5><table>
+				          <tr>
+				            <td class ="text-warning" font-size:20px;>{{ form.username.label_tag }}</td>
+				            <td>{{ form.username }}</td>
+				          </tr>
+
+				          <tr>
+				            <td class ="text-warning" font-size:20px;>{{ form.password.label_tag }}</td>
+				            <td>{{ form.password }}</td>
+				          </tr>
+				          </table>
+				          <small
+				            class="form-text text-muted text-warning" font-size:12px; style="width: 200px;"><p><a href="{% url 'password_reset' %}">Forgot Password? Click here</a></p>
+				          </small>
+				          <input class ="text-warning" type="submit" value="SUBMIT" style="width: 70px; margin-left: 66px;"/>
+				          <input type="hidden" name="next" value="{{ next }}" />
+				      </div>                
+				  	</div>
+       
+  					</div>
+  				</div>
+				</form>
+
+
+			{% endblock %}
+		</div>
+			<!-- login page code ends -->
+
+		<div class="footer">
+			Copyright 2011 - 2021 : Health Tracker/CSDC  - All Rights Reserved Worldwide.
+		</div>
+	</body>
+</html>

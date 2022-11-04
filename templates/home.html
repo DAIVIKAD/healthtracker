@@ -1,0 +1,368 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<body id="page-top">
+    	<div>
+	
+	<div class="align-left">
+
+
+<div class="container-fluid mt-5">
+	
+		<div class="row">
+			 <div class="col">
+							<div class="col-lg-4 mt-5"><input type="number" placeholder="Customer id" class="form-control"></div>	
+
+							
+	</div>
+	
+	 <div class="col">
+							<div class="col-lg-4 mt-5"><input type="number" placeholder="Loan id" class="form-control"></div>		
+	</div>
+	
+	
+	</div>
+
+</div>
+
+
+<div class="container m-2">
+	<div class="row">
+		<div class="col-lg-8 mt-5">
+		<div style=" float:right">
+			<button type="button" class="btn btn-success btn-sm m-3 align-right" data-toggle="modal" data-target="#myModal">ADD</button>
+</div>
+			<caption> <h3> KYC Document</h3> </caption> 
+
+
+			<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">KYC</h4>
+      </div>
+	  <div class= "container">
+	  <div class= "rows"> 
+	  <div class="col-lg-12">
+      <div class="col-md-8"> 	  
+	  <h4> Select documents</h4>
+	  <select class="form-control">
+			<option>Aadhar Card</option>
+			<option>Pan Card</option>
+			<option>Driving Lisence</option>
+			<option>Others</option>							
+		</select>
+  </div>
+<div class="rows">
+<div class="col-md-3">
+<div class="m-1 btn-group">
+<div>
+<h4> UPLOAD</h4>
+<input type="file" class=" btn-sm btn-secondary m-1"></input>
+<h4> SCAN</h4>
+<input  type="text" class=" btn-sm btn-warning m-1"></input>
+</div>
+</div>
+<div class="progress m-2">
+    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+      <span class="sr-only">70% Complete</span>
+    </div>
+  </div>
+</div>
+<div class="text-center">
+	<button type="button" class=" btn-sm btn-success m-3">SUBMIT</button>
+	</div>
+</div>  
+	  </div>
+	 
+	  </div>
+	  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+			
+		<table align="center" cellpadding="7" cellspacing="5" border="1" >
+			<tr>
+				<th> Sl no</th>
+				<th> Document Name</th>
+				<th> Document Type </th>
+				<th> Document Description</th>
+				<th> Document Status</th>
+				<th> Valid Till</th>
+				<th> Added Date</th>
+			    <th> Action</th>	
+			</tr>
+			
+			<tr>
+				<td> 001</td>
+				<td> Ganesh k</td>
+				<td> Aadhar Card</td>
+				<td> 3436570912</td>
+				<td> Active</td>
+				<td> 2024</td>
+				<td> 23/6/2017</td>
+				<td>
+								<div class="btn-sm btn-info m-2">View</div> 
+								<div class="btn-sm btn-success m-2">Update</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td >
+						          <div class="btn-sm btn-info m-2">View</div> 
+								<div class="btn-sm btn-success m-2">Update</div>
+				</td>
+			</tr>
+			
+				<tr>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td>
+						          <div class="btn-sm btn-info m-2">View</div> 
+								<div class="btn-sm btn-success m-2">Update</div>
+				</td>
+			</tr>
+			
+		</table>
+		
+			</br>
+			</br>
+		<caption> <h3> Loan Account Docs</h3> </caption>
+			<div style=" float:right" class="mb-3">
+			<button type="button" class="btn btn-success btn-sm m-3 align-right" data-toggle="modal" data-target="#myModal">ADD</button>
+</div>
+			<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Loan Account Doc</h4>
+      </div>
+	  <div class= "container">
+	  <div class= "rows"> 
+	  <div class="col-lg-12">
+      <div class="col-md-5"> 	  
+	  <h4> Select documents</h4>
+	<div class="col-md-8"> 	  
+	  <h4> Select documents</h4>
+	  <select class="form-control">
+			<option>Aadhar Card</option>
+			<option>Pan Card</option>
+			<option>Driving Lisence</option>
+			<option>Others</option>							
+		</select>
+  </div>
+  </div>
+<div class="rows">
+<div class="col-md-3">
+<div class="m-1 btn-group">
+<div>
+<h4> UPLOAD</h4>
+<input type="file" class=" btn-sm btn-secondary m-1"></input>
+<h4> SCAN</h4>
+<input  type="text" class=" btn-sm btn-warning m-1"></input>
+</div>
+</div>
+<div class="progress m-2">
+    <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width:30%">
+      <span class="sr-only">30% Complete</span>
+    </div>
+  </div>
+</div>
+<div class="text-center">
+	<button type="button" class=" btn-sm btn-success m-3">SUBMIT</button>
+	</div>
+</div>  
+	  </div>
+	 
+	  </div>
+	  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div> 
+			
+		<table align="center" cellpadding="7" cellspacing="5" border="1" >
+			<tr>
+				<th> Sl no</th>
+				<th> Document Name</th>
+				<th> Document Type </th>
+				<th> Document Description</th>
+				<th> Document Status</th>
+				<th> Valid Till</th>
+				<th> Added Date</th>
+			    <th> Action</th>	
+			</tr>
+			
+			<tr>
+				<td> 001</td>
+				<td> Ganesh k</td>
+				<td> Aadhar Card</td>
+				<td> 3436570912</td>
+				<td> Active</td>
+				<td> 2024</td>
+				<td> 23/6/2017</td>
+				<td>
+								<div class="btn-sm btn-info m-2">View</div> 
+								<div class="btn-sm btn-success m-2">Update</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td >
+						          <div class="btn-sm btn-info m-2">View</div> 
+								<div class="btn-sm btn-success m-2">Update</div>
+				</td>
+			</tr>
+			
+				<tr>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td>
+						          <div class="btn-sm btn-info m-2">View</div> 
+								<div class="btn-sm btn-success m-2">Update</div>
+				</td>
+			</tr>
+			
+		</table>
+		
+		
+
+	</div>
+	
+	
+	
+	<div class="col-lg-4  mt-5">
+	
+		<div class="text-left mt-5">
+						<div class="text-center  "> <h4>Customer Profile </h4></div>
+						<div class="card">
+								
+								<br>
+							<div class="row form-group col-md-12">
+							
+							<div class="col-md-5 mt-2"><b>Customer Name :</b></div>
+							<div class="col-md-7 mt-2"> <input type="text" class="form-control"/></div>
+								<br>
+							<div class="col-md-5 mt-2"> <b>Age :</b></div>
+							<div class="col-md-7 mt-2"> <input type="text" class="form-control"/></div>
+															<br>
+
+							<div class="col-md-5 mt-2"> <b>Host Branch :</b></div>
+							<div class="col-md-7 mt-2"> <input type="text" class="form-control"/></div>
+															<br>
+
+							<div class="col-md-5 mt-2"> <b>Address :</b></div>
+							<div class="col-md-7 mt-2"> <input type="text" class="form-control"/></div>
+															<br>
+
+							<div class="col-md-5 mt-2"> <b>Pan :</b></div>
+							<div class="col-md-7 mt-2"> <input type="text" class="form-control"/></div>
+															<br>
+
+							<div class="col-md-5 mt-2"> <b>Aadhar :</b></div>
+							<div class="col-md-7 mt-2"> <input type="text" class="form-control"/></div>
+					</div>	
+					</div>					
+							</div>
+							
+							
+					<div class="text-left mt-5">
+						<div class="text-center mt-3"> <h3>Account Profile </h3></div>
+						<div class="card mt-5">
+								
+								
+							<div class="row form-group mt-3 col-md-12">
+							
+							<div class="col-md-5 mt-2"><b>Account Name :</b></div>
+							<div class="col-md-7 mt-2"> <input type="text" class="form-control"/></div><br>
+							<div class="col-md-5 mt-2"> <b>Sanction Amt :</b></div>
+							<div class="col-md-7 mt-2"> <input type="text" class="form-control"/></div>
+															<br>
+							<div class="col-md-5 mt-2"> <b>Sanction Date :</b></div>
+							<div class="col-md-7 mt-2"> <input type="text" class="form-control"/></div>
+							<br>
+
+							<div class="col-md-5 mt-2"> <b>No of Instmts :</b></div>
+							<div class="col-md-7 mt-2"> <input type="text" class="form-control"/></div>
+															<br>
+
+							<div class="col-md-5 mt-2"> <b>Due Date :</b></div>
+							<div class="col-md-7 mt-2"> <input type="text" class="form-control"/></div>
+															<br>
+
+							<div class="col-md-5 mt-2"> <b>Agent Code :</b></div>
+							<div class="col-md-7 mt-2"> <input type="text" class="form-control"/></div>
+					</div>	
+					</div>					
+							</div>
+							
+							
+					
+						</div> <!--card body left end-->
+						
+						
+						
+							
+						</div>
+					</div>
+					
+					
+			</div>
+		</div>
+</div>
+
+
+			
+	
+
+    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+    
+    
+    <script src="static/js/chart.min.js"></script>
+    <script src="static/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="static/js/theme.js"></script>
+
+</body>
+
+
+{% endblock %}
+   
